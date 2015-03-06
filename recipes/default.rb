@@ -84,6 +84,7 @@ template node['titan']['rexster']['config'] do
   owner node['titan']['user']
   group node['titan']['group']
   mode node['titan']['install_dir_permissions']
+  variables(storage_opts: node['titan']['storage'])
 end
 
 # handle external dependencies/jars

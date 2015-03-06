@@ -81,6 +81,11 @@ describe 'titan::default' do
       )
     end
 
+    it 'creates the template /opt/titan/conf/rexster-cassandra-es.xml that matches the one in ./spec/rendered_templates' do
+      rendered_template = File.read('./spec/rendered_templates/rexster-cassandra-es.xml')
+      expect(chef_run).to render_file('/opt/titan/conf/rexster-cassandra-es.xml').with_content(rendered_template)
+    end
+
     it 'creates the titan init conf file' do
       expect(chef_run).to create_template('/etc/init/titan.conf').with(
         source: 'titan.upstart.conf.erb',
