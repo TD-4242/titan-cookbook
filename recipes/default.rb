@@ -50,7 +50,7 @@ bash "extract #{tmp}, move it to #{node['titan']['installation_dir']}" do
 end
 
 # create cassandra configuration
-template node['titan']['storage']['cassandra_config'] do
+template node['titan']['cassandra_config'] do
   source 'cassandra.yaml.erb'
   owner node['titan']['user']
   group node['titan']['group']
@@ -70,11 +70,12 @@ template node['titan']['storage']['cassandra_config'] do
 end
 
 # create properties file
-template node['titan']['storage']['properties'] do
+template node['titan']['storage_properties'] do
   source 'titan-server-cassandra-es.properties.erb'
   owner node['titan']['user']
   group node['titan']['group']
   mode node['titan']['install_dir_permissions']
+  variables(options: node['titan']['storage'])
 end
 
 # create rexster server conf

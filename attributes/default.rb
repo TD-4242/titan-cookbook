@@ -2,32 +2,16 @@
 default['java']['jdk_version'] = '7'
 
 # titan attributes
-default['titan'] = {
-  installation_dir: '/opt/titan/',
-  version: '0.5.2-hadoop1',
-  user: 'titan',
-  group: 'titan',
-  install_dir_permissions: '755'
-}
-
+default['titan']['installation_dir'] = '/opt/titan/'
+default['titan']['version'] = '0.5.2-hadoop1'
+default['titan']['user'] = 'titan'
+default['titan']['group'] = 'titan'
+default['titan']['install_dir_permissions'] = '755'
 default['titan']['conf_dir'] = File.join(default['titan']['installation_dir'], 'conf')
 default['titan']['start_command'] = File.join(default['titan']['installation_dir'], 'bin/titan.sh') + ' -v -c cassandra-es start'
 default['titan']['stop_command'] = File.join(default['titan']['installation_dir'], 'bin/titan.sh') + ' stop'
-
-default['titan']['storage'] = {
-  properties: File.join(node['titan']['conf_dir'], 'titan-server-cassandra-es.properties'),
-  cassandra_config: File.join(node['titan']['conf_dir'], 'cassandra.yaml'),
-  storage_backend: 'cassandra',
-  db_cache: true,
-  db_cache_clean_wait: 0,
-  db_cache_time: 0,
-  db_cache_size: 0.25,
-  index_backend: 'elasticsearch',
-  index_directory: File.join(node['titan']['installation_dir'], 'db/es'),
-  index_client_only: false, # Whether this node is client node with no data. https://github.com/thinkaurelius/titan/wiki/Using-Elastic-Search
-  index_hostname: '127.0.0.1', # hostname of ES if not running embedded
-  index_cluster_name: 'elasticsearch'
-}
+default['titan']['storage_properties'] = File.join(node['titan']['conf_dir'], 'titan-server-cassandra-es.properties')
+default['titan']['cassandra_config'] = File.join(node['titan']['conf_dir'], 'cassandra.yaml')
 
 # reference: https://github.com/tinkerpop/rexster/wiki/Rexster-Configuration
 default['titan']['rexster'] = {
